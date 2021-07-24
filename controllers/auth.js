@@ -55,7 +55,7 @@ const userLogin = async (req, res = response) => {
         if (!validPassword) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Bac credentials'
+                msg: 'Bad credentials'
             })
         }
 
@@ -77,15 +77,17 @@ const userLogin = async (req, res = response) => {
 };
 
 
-const reValidateToken = async(req, res = response) => {
+const reValidateToken = async (req, res = response) => {
 
     const { uid, name } = req;
 
     const token = await generateJWT(uid, name);
-    
+
     res.json({
         ok: true,
-        token
+        token,
+        uid, 
+        name
     })
 };
 
